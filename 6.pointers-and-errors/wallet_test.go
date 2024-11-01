@@ -1,6 +1,8 @@
 package pointersanderrors
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestWallet(t *testing.T) {
 	assertBalance := func (t testing.TB, wallet Wallet, want Bitcoin)  {
@@ -28,5 +30,18 @@ func TestWallet(t *testing.T) {
 		want := Bitcoin(10)
 
 		assertBalance(t,wallet,want)		
+	})
+
+	t.Run("withdraw insufficient funds", func(t *testing.T) {
+		startingBalance := Bitcoin(20)
+		wallet := Wallet{startingBalance}
+		err := wallet.Withdraw(Bitcoin(100))
+
+		assertBalance(t,wallet,startingBalance)
+
+		if err != nil {
+			t.Error("wanted an error but didn't get one")
+		}
+		
 	})
 }
