@@ -9,6 +9,6 @@ func TestSearch(t *testing.T) {
 	want := "this is just a test"
 
 	if got != want{
-		t.Errorf("got %v want %v given %d",got,want,"test")
+		t.Errorf("got %v want %v given %q",got,want,"test")
 	}
 }
