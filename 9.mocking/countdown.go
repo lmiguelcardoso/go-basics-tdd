@@ -10,12 +10,6 @@ import (
 const finalWord = "Go!"
 const countdownStart = 3
 
-type DefaultSleeper struct{}
-
-func (d *DefaultSleeper) Sleep() {
-	time.Sleep(1 * time.Second)
-}
-
 type Sleeper interface {
 	Sleep()
 }
@@ -38,6 +32,6 @@ func Countdown(out io.Writer, sleeper Sleeper) {
 }
 
 func main() {
-	sleeper := DefaultSleeper{}
+	sleeper := ConfigurableSleeper{1 * time.Second, time.Sleep}
 	Countdown(os.Stdout, &sleeper)
 }
